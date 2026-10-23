@@ -33,8 +33,6 @@ The platform includes user authentication, structured learning content, and an a
 
 The following section showcases the main application interfaces.
 
-> **Note:** Upload your actual screenshots to a folder named `screenshots` in the repository. Make sure the filenames below match your uploaded files.
-
 ### 1. Home Page
 ![Home Page](screenshots/home-page.png)
 
