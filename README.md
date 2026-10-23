@@ -33,8 +33,3 @@ Username: `admin`
 
 Password: `1234`
 
-### User credentials for testing
-
-Username: `omkar`
-
-Password: `1234`
