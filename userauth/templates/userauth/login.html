@@ -1,0 +1,162 @@
+{% extends 'userauth/base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn with AR - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* SAME CSS (no change) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #e9eef5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-card {
+      display: flex;
+      width: 1000px;
+      height: 650px;
+      background: #fff;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .form-side {
+      flex: 1;
+      padding: 50px 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    .welcome-text h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .welcome-text p {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .input-box {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+    }
+
+    .input-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+    }
+
+    /* BUTTON */
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(90deg, #302b63, #ff1f5a);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero-side {
+      flex: 1.2;
+      background: url('https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac') center/cover;
+    }
+
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <!-- LEFT -->
+    <div class="form-side">
+      <div class="logo">TeachAR</div>
+
+      <div class="welcome-text">
+        <h1>Welcome Back</h1>
+        <p>Please login to continue</p>
+
+        <!-- 🔥 DJANGO FORM -->
+        <form method="POST" action="{% url 'userauth:login' %}">
+
+          {% csrf_token %}
+
+          {% if messages %}
+          {% for message in messages %}
+          <p class="error">{{ message }}</p>
+          {% endfor %}
+          {% endif %}
+
+          <div class="input-box">
+            <label>Email</label>
+            <input type="text" name="username" placeholder="Enter username" required>
+          </div>
+
+          <div class="input-box">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+          </div>
+          <div style="text-align:center; margin-top:15px;">
+            Don't have an account?
+            <a href="{% url 'userauth:signup' %}" style="color:#ff1f5a; font-weight:600; text-decoration:none;">
+              Sign Up
+            </a>
+          </div>
+
+
+          <button type="submit" class="btn-login">Login</button>
+        </form>
+      </div>
+
+      <div style="font-size:10px; color:#aaa;">
+        © AR Based Learning Platform
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-side"></div>
+
+  </div>
+
+</body>
+
+</html>
+{% endblock content %}

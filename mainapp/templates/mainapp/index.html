@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeachAR | Immersive Learning</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.5);
+      --accent: #f43f5e;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --glass: rgba(255, 255, 255, 0.7);
+      --border: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+    }
+
+    body.dark {
+      --bg: #020617;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glass: rgba(15, 23, 42, 0.6);
+      --border: rgba(255, 255, 255, 0.1);
+      --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 35%),
+        radial-gradient(circle at 100% 100%, rgba(244, 63, 94, 0.1) 0%, transparent 35%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 8%;
+      gap: 60px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      max-width: 500px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 20px -5px var(--primary-glow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 0 8% 80px;
+    }
+
+    .card {
+      background: var(--glass);
+      padding: 30px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+    }
+
+    /* IMAGE RIGHT SIDE FIX */
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-mesh"></div>
+
+  <nav>
+    <div class="logo">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Learn with AR
+    </div>
+
+    <div class="nav-links">
+      <a href="#">Home</a>
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'userauth:logout' %}" class="btn">Logout</a>
+      {% else %}
+      <a href="{% url 'userauth:login' %}" class="btn">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+
+  {% if user.is_authenticated %}
+
+  <!-- SUBJECT SECTION -->
+  <section style="padding:80px 0;">
+    <div style="padding:0 8%;">
+      <h2 style="margin-bottom:30px;">Choose Subject</h2>
+    </div>
+
+    <div class="grid">
+      {% for subject in subjects %}
+      <div class="card">
+        <img src="{{ subject.image.url }}" style="width:100%; border-radius:12px; margin-bottom:15px;">
+        <h3>{{ subject.name }}</h3>
+        <p>{{ subject.tagline }}</p>
+        <br>
+        <a href="{% url 'subject' subject.name %}" class="btn">Start Learning</a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% else %}
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Bring Education to Life with AR</h1>
+      <p>Break the boundaries of traditional learning. Explore 3D models and interactive environments right from your
+        browser.</p>
+
+      <a href="{% url 'userauth:signup' %}" class="btn">Get Started</a>
+    </div>
+
+    <!-- RIGHT SIDE IMAGE -->
+    <div class="hero-image">
+      <img src="{% static 'images/home.jpg' %}" alt="AR Learning">
+    </div>
+
+  </header>
+
+  {% endif %}
+
+</body>
+
+</html>

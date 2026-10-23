@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ topic.name }} - 3D Model</title>
+
+    <!-- Model Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+    </script>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: #4e4949;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Hotspot circle */
+        .hotspot {
+            background: rgb(106, 98, 98);
+            border-radius: 50%;
+            border: none;
+            width: 28px;
+            height: 28px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Popup label */
+        .annotation {
+            display: none;
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* Show popup when active */
+        .hotspot.active .annotation {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <model-viewer src="{% static topic.model_3d %}" camera-controls auto-rotate autoplay shadow-intensity="1" ar>
+
+        {% for hotspot in hotspots %}
+        <button slot="hotspot-{{ hotspot.number }}" class="hotspot" data-position="{{ hotspot.position }}"
+            data-normal="{{ hotspot.normal }}" onclick="toggleHotspot(this)">
+
+            {{ hotspot.number }}
+
+            <div class="annotation">
+                {{ hotspot.label }}
+            </div>
+
+        </button>
+        {% endfor %}
+
+    </model-viewer>
+
+    <script>
+        function toggleHotspot(element) {
+
+            // Close all other hotspots
+            document.querySelectorAll('.hotspot').forEach(h => {
+                if (h !== element) {
+                    h.classList.remove('active');
+                }
+            });
+
+            // Toggle clicked one
+            element.classList.toggle('active');
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.hotspot')) {
+                document.querySelectorAll('.hotspot')
+                    .forEach(h => h.classList.remove('active'));
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>TeachAR - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #e9eef5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .signup-card {
+      display: flex;
+      width: 1000px;
+      height: 650px;
+      background: #fff;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .form-side {
+      flex: 1;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      margin-bottom: 15px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .btn-signup {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #302b63, #ff1f5a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .link a {
+      color: #ff1f5a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero-side {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac') center/cover;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    @media(max-width: 900px) {
+      .signup-card {
+        flex-direction: column;
+        height: auto;
+        width: 95%;
+      }
+
+      .hero-side {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="signup-card">
+
+    <!-- LEFT FORM -->
+    <div class="form-side">
+      <div class="logo">TeachAR</div>
+
+      <h1>Create Account</h1>
+      <p>Join and start learning with AR</p>
+
+      <form method="POST" action="{% url 'userauth:signup' %}">
+
+        {% csrf_token %}
+
+        {% for message in messages %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+
+        <div class="input-box">
+          <input type="text" name="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-box">
+          <input type="text" name="username" placeholder="Username" required>
+        </div>
+
+        <div class="input-box">
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="password2" placeholder="Confirm Password" required>
+        </div>
+
+        <button type="submit" class="btn-signup">Sign Up</button>
+      </form>
+
+      <div class="link">
+        Already have an account? <a href="{% url 'userauth:login' %}">Login</a>
+
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="hero-side"></div>
+
+  </div>
+
+</body>
+
+</html>
