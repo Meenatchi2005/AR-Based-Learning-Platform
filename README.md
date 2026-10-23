@@ -1,32 +1,165 @@
-# TeachAR
+# AR-Based Learning Platform
 
-An e-learning AR application for immersive and practical based learning.
+An interactive web-based learning platform that combines **Augmented Reality (AR)** and **3D visualization** to make educational concepts easier to explore and understand.
 
-## Setup Instructions
+## 📌 Project Overview
 
-* Clone the Repository
+The AR-Based Learning Platform enables students to explore educational subjects and topics through interactive 3D models in a web browser. Users can rotate, zoom, and examine 3D objects, while hotspot annotations provide additional information about specific parts of a model.
 
+The platform includes user authentication, structured learning content, and an administration interface for managing educational resources.
+
+## ✨ Key Features
+
+- **User Authentication:** Login and logout functionality.
+- **Subject Management:** Organizes learning content by subject.
+- **Topic Management:** Displays topic details, images, and associated 3D models.
+- **Interactive 3D Visualization:** Rotate, zoom, and explore 3D objects.
+- **Augmented Reality Support:** View compatible 3D models in AR on supported devices.
+- **Hotspot Annotations:** Display additional information about selected model components.
+- **Admin Content Management:** Manage subjects, topics, images, and 3D models through Django Admin.
+
+## 🛠️ Technologies Used
+
+| Component | Technology |
+|---|---|
+| Frontend | HTML, CSS, JavaScript, Bootstrap |
+| Backend | Python, Django |
+| Database | SQLite |
+| 3D Model Viewer | Google `<model-viewer>` |
+| AR Support | WebXR / supported browser AR |
+| Development Tool | Visual Studio Code |
+
+## 📸 Project Screenshots
+
+The following section showcases the main application interfaces.
+
+> **Note:** Upload your actual screenshots to a folder named `screenshots` in the repository. Make sure the filenames below match your uploaded files.
+
+### 1. Home Page
+![Home Page](screenshots/home-page.png)
+
+### 2. Login Page
+![Login Page](screenshots/login-page.png)
+
+### 3. Signup Page
+![Signup Page](screenshots/signup-page.png)
+
+### 4. Subject Selection
+![Subject Selection](screenshots/subject-page.png)
+
+### 5. Topic Selection
+![Topic Selection](screenshots/topics-page-biology.png)
+
+![Topic Selection](screenshots/topics-page-SpaceScience.png)
+
+### 6. Interactive 3D Model Viewer
+![3D Model Viewer](screenshots/3d-model-viewer1.png)
+
+![3D Model Viewer](screenshots/3d-model-viewer2.png)
+
+![3D Model Viewer](screenshots/3d-model-viewer3.png)
+
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+- Python installed on your computer
+- pip package manager
+- Git
+- A web browser
+
+### Steps to Run Locally
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/Meenatchi2005/AR-Based-Learning-Platform.git
 ```
-git clone https://github.com/omkar3602/TeachAR.git
+
+**2. Open the project folder**
+
+```bash
+cd AR-Based-Learning-Platform
 ```
 
-* Make sure you have Python 3.x installed. Or install it from [here](https://www.python.org/downloads/).
+**3. Create a virtual environment**
 
-* Install the requirements for the project.
-
+```bash
+python -m venv venv
 ```
+
+**4. Activate the virtual environment**
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+**5. Install project dependencies**
+
+```bash
 pip install -r requirements.txt
 ```
 
-* Start the server.
+**6. Apply database migrations**
+
+```bash
+python manage.py migrate
 ```
+
+**7. Create an administrator account (optional)**
+
+```bash
+python manage.py createsuperuser
+```
+
+**8. Start the development server**
+
+```bash
 python manage.py runserver
 ```
 
-* Great! The website should be running at http://localhost:8000/
+**9. Open the application**
 
-* **NOTE:** If you want to use the AR effects scan the images in the `target_images` folder.
----
+Visit:
+
+```text
+http://127.0.0.1:8000/
+```
+
+*Note: These commands assume that `manage.py` and `requirements.txt` are present at the repository root. Follow the project's actual directory structure if they are located elsewhere.*
+
+## 🎯 Project Objectives
+
+- Improve conceptual understanding through interactive 3D learning.
+- Organize educational content into subjects and topics.
+- Provide an engaging browser-based learning experience.
+- Enable administrators to maintain educational resources efficiently.
+- Explore the use of AR technology in digital education.
+
+## 🔮 Future Enhancements
+
+- Mobile application integration.
+- Voice-based explanations for 3D models.
+- Additional interactive educational models.
+- Enhanced AR learning experiences.
+
+## 🎓 Project Information
+
+- **Project Title:** AR-Based Learning Platform
+- **Project Type:** MCA Mini Project
+- **Institution:** Periyar University, Salem
+- **Academic Year:** 2025–2026
+
+## 👩‍💻 Author
+
+**Meenatchi M**
+
+## 📄 License
+
+Add a license file if you intend to distribute this project under an open-source license.
 ### Admin credentials for testing
 
 Username: `admin`
